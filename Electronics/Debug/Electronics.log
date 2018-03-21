@@ -1,0 +1,5 @@
+﻿  Electronics.cpp
+d:\documents\visual studio 2017\projects\electronics\electronics\electronics.cpp(47): warning C4018: '<': signed/unsigned mismatch
+  StockItem.cpp
+  Generating Code...
+  Electronics.vcxproj -> D:\Documents\Visual Studio 2017\Projects\Electronics\Debug\Electronics.exe
