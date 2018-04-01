@@ -1,59 +1,35 @@
 #include "stdafx.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
-using namespace std;
+#include "StockItem.h"
 
-class StockItem {
-	public:
-		string itemType;
-		string stockCode;
-		int stock;
-		int price;
-		string additional;
+StockItem::StockItem(string type, string code, int number, int pence, string add) {
+	this -> itemType = type;
+	this-> stockCode = code;
+	this-> stock = number;
+	this-> price = pence;
+	this-> additional = add;
+}
 
-		StockItem(string type, string code, int number, int pence, string add) {
-			this -> itemType = type;
-			this-> stockCode = code;
-			this-> stock = number;
-			this-> price = pence;
-			this-> additional = add;
-		}
 
-		StockItem(string type, string code, int number, int pence) {
-			this-> itemType = type;
-			this-> stockCode = code;
-			this-> stock = number;
-			this-> price = pence;
-			this-> additional = "";
-		}
-
-		~StockItem() {
+StockItem::~StockItem() {
 			
-		}
+}
 		
-		string getType() {
-			return itemType;
-		}
+string StockItem::getType() {
+	return this-> itemType;
+}
 
-		string getCode() {
-			return this-> stockCode;
-		}
+string StockItem::getCode() {
+	return this-> stockCode;
+}
 
-		int getStock() {
-			return stock;
-		}
+int StockItem::getStock() {
+	return this-> stock;
+}
 
-		int getPrice() {
-			return price;
-		}
+int StockItem::getPrice() {
+	return this-> price;
+}
 
-		string getAdditional() {
-			return additional;
-		}
-
-
-
-};
+string StockItem::getAdditional() {
+	return this-> additional;
+}
