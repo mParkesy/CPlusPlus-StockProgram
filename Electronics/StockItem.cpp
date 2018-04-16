@@ -33,3 +33,9 @@ int StockItem::getPrice() {
 string StockItem::getAdditional() {
 	return this-> additional;
 }
+
+
+Resistor::Resistor(string resistance) : StockItem(string type, string code, int number, int pence, string add){
+
+
+}
