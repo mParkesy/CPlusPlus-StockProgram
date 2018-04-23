@@ -23,10 +23,10 @@ public:
     StockItem();
     StockItem(string type, string code, int number, int pence);
     ~StockItem();
-    string getType();
-    string getCode();
-    int getStock();
-    int getPrice();
+    virtual string getType();
+    virtual string getCode();
+    virtual int getStock();
+    virtual int getPrice();
 };
 
 class Resistor : public StockItem {
@@ -50,4 +50,21 @@ class Diode : public StockItem {
 public:
     Diode(string type, string code, int number, int pence);
 };
+
+class Transistor : public StockItem {
+private:
+    string transistorType;
+public:
+    Transistor(string transistorType, string type, string code, int number, int pence);
+    string getTransistorType();
+};
+
+class IC : public StockItem {
+private:
+    string ICtype;
+public:
+    IC(string ICtype, string type, string code, int number, int pence);
+    string getICtype();
+};
+
 #endif

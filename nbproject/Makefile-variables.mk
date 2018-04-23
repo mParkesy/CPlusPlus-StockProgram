@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=stockprogram
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/stockprogram
+CND_ARTIFACT_NAME_Debug=electronics-inventory
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/electronics-inventory
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=stockprogram.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/stockprogram.tar
+CND_PACKAGE_NAME_Debug=electronics-inventory.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/electronics-inventory.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=stockprogram
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/stockprogram
+CND_ARTIFACT_NAME_Release=electronics-inventory
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/electronics-inventory
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=stockprogram.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/stockprogram.tar
+CND_PACKAGE_NAME_Release=electronics-inventory.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/electronics-inventory.tar
 #
 # include compiler specific variables
 #

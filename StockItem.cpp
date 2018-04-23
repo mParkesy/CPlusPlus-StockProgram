@@ -54,16 +54,16 @@ double Resistor::getNumericalResistance() {
     for (int i = 0; i < resistance.length(); i++) {
         if (isdigit(resistance[i]) && letter.length() == 0) {
             firstDigits = firstDigits + resistance[i];
-            cout << firstDigits;
+            //cout << firstDigits;
         } else if (isalpha(resistance[i]) && letter.length() == 0) {
             letter = resistance[i];
-            cout << letter;
+            //cout << letter;
         } else if (isdigit(resistance[i]) && letter.length() > 0) {
             secondDigits = secondDigits + resistance[i];
-            cout << secondDigits;
+            //cout << secondDigits;
         }
     }
-    cout << " Result: ";
+    //cout << " Result: ";
     int multiplier;
     if (letter == "R") {
         multiplier = 1;
@@ -75,9 +75,9 @@ double Resistor::getNumericalResistance() {
     if (secondDigits.length() > 0) {
         firstDigits = firstDigits + "." + secondDigits;
     }
-    double result = stoi(firstDigits) * multiplier;
-    cout << "Test: " << result  << endl;
-    return stoi(firstDigits) * multiplier;
+    double result = stod(firstDigits) * multiplier;
+    //cout << "Test: " << result  << endl;
+    return stod(firstDigits) * multiplier;
 }
 
 Capacitor::Capacitor(string capacitance, string type, string code, int number, int pence) : StockItem(type, code, number, pence) {
@@ -90,4 +90,20 @@ string Capacitor::getCapacitance(){
 
 Diode::Diode(string type, string code, int number, int pence) : StockItem(type, code, number, pence){
     
+}
+
+Transistor::Transistor(string transistorType, string type, string code, int number, int pence) : StockItem(type, code, number, pence){
+    this -> transistorType = transistorType;
+}
+
+string Transistor::getTransistorType(){
+    return this -> transistorType;
+}
+
+IC::IC(string ICtype, string type, string code, int number, int pence) : StockItem(type, code, number, pence){
+    this -> ICtype = ICtype;
+}
+
+string IC::getICtype(){
+    return this -> ICtype;
 }
