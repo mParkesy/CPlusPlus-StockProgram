@@ -24,10 +24,10 @@ public:
     StockItem();
     StockItem(std::string type, std::string code, int number, int pence);
     ~StockItem();
-    inline std::string getType();
-    inline std::string getCode();
-    inline int getStock();
-    inline int getPrice();
+    inline std::string getType() const;
+    inline std::string getCode() const;
+    inline int getStock() const;
+    inline int getPrice() const;
     virtual std::string getInfo() = 0;
     inline void setType(std::string type);
     inline void setCode(std::string code);
@@ -71,7 +71,6 @@ private:
 public:
     Resistor(std::string resistance, std::string type, std::string code,
             int number, int pence);
-    double getNumericalResistance();
     std::string getInfo();
     void setInfo();
 };

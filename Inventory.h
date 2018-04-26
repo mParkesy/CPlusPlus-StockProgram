@@ -7,19 +7,25 @@
 
 #ifndef INVENTORY_H
 #define INVENTORY_H
+#include <vector>
+#include "StockItem.h"
 
 class Inventory {
 private:
-    std::list<StockItem*> inventory;
+    std::vector<StockItem*> inventory;
     
 public:
     Inventory();
     Inventory(const Inventory& orig);
-    virtual ~Inventory();
+    ~Inventory();
     inline int getSize() const;
     inline void addStock(StockItem *item);
     inline StockItem& getStock(int pos) const;
     inline void removeStock(int pos);
+    StockItem& largestInStockComponent();
+    int getNumberOfNPNTransistors();
+    double getTotalInStockResistance();
+    int getTotalStockAboveTenPence(int amount);
 };
 
 inline int Inventory::getSize() const {
@@ -32,13 +38,12 @@ inline void Inventory::addStock(StockItem *item){
 
 inline StockItem& Inventory::getStock(int pos) const 
 {
-    return *inventory[pos];
+    return *inventory.at(pos);
 }
 
 inline void Inventory::removeStock(int pos){
-    inventory.remove(inventory.begin() + pos);
+    inventory.erase(inventory.begin() + pos);
 }
 
-inline 
 #endif /* INVENTORY_H */
 

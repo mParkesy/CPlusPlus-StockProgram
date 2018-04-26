@@ -22,65 +22,6 @@ using namespace std;
  * @param items
  * @return 
  */
-vector<Resistor*> getResistorList(vector<StockItem*> items) {
-    vector<Resistor*> list;
-    for (StockItem *stockitem : items) {
-        if (stockitem->getType() == "resistor") {
-            Resistor *res = dynamic_cast<Resistor*> (stockitem);
-            list.push_back(res);
-        }
-    }
-    return list;
-}
-
-double getAllResistance(vector<Resistor*> resistors) {
-    double total = 0;
-    for (Resistor *r : resistors) {
-        if (r->getStock() > 0) {
-            total += r->getNumericalResistance();
-        }
-    }
-    return total;
-}
-
-int getTotalStockAboveTen(vector<StockItem*> items) {
-    int stockTotal = 0;
-    for (StockItem *stockitem : items) {
-        if (stockitem->getPrice() > 10) {
-            stockTotal++;
-        }
-    }
-    return stockTotal;
-}
-
-int getNumberOfNPN(Inventory &items) {
-    int total = 0;
-    for (StockItem *stockitem : items) {
-        if (stockitem->getType() == "transistor") {
-            Transistor *tran = dynamic_cast<Transistor*> (stockitem);
-            if (tran->getTransistorType() == "NPN") {
-                total++;
-            }
-        }
-    }
-    return total;
-}
-
-string largestInStockComponent(Inventory &items) {
-    StockItem *largest;
-    for (StockItem *stockitem : items) {
-       
-    }
-
-}
-
-//vector<StockItem*> sortPrice(vector<StockItem*> items){
-//    sort(items.begin(), items.end());
-//    for(StockItem *stockitem : items){
-//        cout << stockitem->getPrice() << endl;
-//    }
-//    return items;
-//}
 
 string removeCharacters(string str) {
     for (int i = 0; i < str.length(); i++) {
@@ -148,49 +89,38 @@ int main(int argc, char** argv) {
 
     string file = "inventory.txt";
 
-    Inventory inventory = new Inventory();
+    Inventory *inventory = new Inventory;
 
     cout << "File to be read: " << file << endl;
     cout << "Reading " << file << "..." << endl;
-    inventory = getStockList(file);
+    inventory = getStockList(file, inventory);
     
     vector<StockItem*> items = getStockList(file);
     cout << "Stock Items successfully saved." << endl;
 
     cout << "" << endl;
 
-    cout << "There are " << inventory.getSize() << " Stock Items now in the inventory." << endl;
+    cout << "There are now " << inventory.getSize() << " Stock Items in the inventory." << endl;
 
     cout << "" << endl;
 
-    //    char decision;
-    //    cout << "Would you like to see the list of Inventory Items? (y or n): " <<;
-    //    cin >> decision;
-    //    
-    //    if(decision == 'y'){
-    //        for (StockItem *stockitem : items) {
-    //            cout << 
-    //        }
-    //    }
-
-
     // Print a list of the inventory, sorted in order of increasing price
+    
     // What is the component with the largest number of components in stock?
 
     // How many NPN transistors does Chartlins have in stock?
-    cout << "The number of NPN transistors that we have in stock is: " << getNumberOfNPN(items) << endl;
+    cout << "The number of NPN transistors that we have in stock is: " << inventory.getNumberOfNPN() << endl;
 
 
     // What is the total resistance of all of the resistors in stock?
     cout << "The total resistance of all resistors in stock is: ";
-    vector<Resistor*> rList = getResistorList(items);
-    cout << setprecision(12) << getAllResistance(rList) << endl;
+    cout << setprecision(12) << inventory.getAllResistance() << endl;
 
 
     // How man stock items have unit prices above 10p?
 
     cout << "The total number of items that are priced above 10 pence is: ";
-    cout << getTotalStockAboveTen(items) << endl;
+    cout << inventory.getTotalStockAboveTen() << endl;
 
     return 0;
 
