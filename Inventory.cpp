@@ -7,11 +7,12 @@
 
 using namespace std;
 
-#include "Inventory.h"
-#include "StockItem.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
+#include "Inventory.h"
+#include "StockItem.h"
 
 Inventory::Inventory() {
 }
@@ -75,7 +76,7 @@ string removeCharacters(string str) {
     return str;
 }
 
-std::istream &operator>>(std::istream &is, Inventory &inv) {
+std::istream& operator>>(std::istream &is, Inventory &inv) {
     ifstream infile("inventory.txt");
     while (infile) {
         string s;
@@ -118,4 +119,18 @@ std::istream &operator>>(std::istream &is, Inventory &inv) {
         }
     }
     return is;
+}
+
+std::ostream& operator<<(std::ostream &os, const Inventory &inv){
+    for(StockItem *stockitem : inv.inventory){
+        os << *stockitem << endl;
+    }
+    return os;
+}
+
+
+void Inventory::sortInv(){
+    sort(inventory.begin(), inventory.end(), [](const StockItem* a, const StockItem* b) -> bool{
+        return a->getPrice() < b->getPrice();
+    });
 }

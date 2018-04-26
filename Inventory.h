@@ -26,6 +26,9 @@ public:
     int getNumberOfNPNTransistors();
     double getTotalInStockResistance();
     int getTotalStockAboveTenPence(int amount);
+    void sortInv();
+    friend std::ostream& operator<<(std::ostream &os, const Inventory &inv);
+    
 };
 
 inline int Inventory::getSize() const {
@@ -45,7 +48,8 @@ inline void Inventory::removeStock(int pos){
     inventory.erase(inventory.begin() + pos);
 }
 
-std::istream &operator>> (std::istream &is, Inventory &inv);
+std::ostream& operator<<(std::ostream &os, const Inventory &inv);
+std::istream& operator>>(std::istream &is, Inventory &inv);
 
 std::string removeCharacters(std::string str);
 

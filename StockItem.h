@@ -5,11 +5,11 @@
  * Created on 19 April 2018, 12:20
  */
 
-#include <string>
-#include <vector>
-
 #ifndef StockItem_H
 #define StockItem_H
+#include <string>
+#include <iomanip>
+
 
 // ===============================STOCKITEM====================================
 
@@ -32,6 +32,7 @@ public:
     inline void setType(std::string type);
     inline void setCode(std::string code);
     inline void setStock(int stock);
+    friend std::ostream& operator<<(std::ostream &os, const StockItem &item);
 };
 
 inline std::string StockItem::getType() const {
@@ -62,6 +63,15 @@ inline void StockItem::setStock(int stock) {
     this->stock = stock;
 }
 
+inline std::ostream& operator<<(std::ostream &os, const StockItem &item) {
+    return os << "\"" << item.itemType << "\"" << ","
+            << item.stockCode << ","
+            << "\"" << item.stock << "\"" << ","
+            << "\"" << item.price << "\"" << ","
+            << "\"" << item.getInfo();
+}
+
+std::istream& operator>>(std::istream &is, StockItem &item);
 
 // ===============================RESISTOR=====================================
 

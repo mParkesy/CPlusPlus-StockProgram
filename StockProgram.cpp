@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
     cout << "" << endl;
 
     // Print a list of the inventory, sorted in order of increasing price
+    inventory->sortInv();
+    cout << "Stock Items sorted by price: " << endl;
+    cout << *inventory;
     
     // What is the component with the largest number of components in stock?
 
