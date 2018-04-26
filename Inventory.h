@@ -45,5 +45,9 @@ inline void Inventory::removeStock(int pos){
     inventory.erase(inventory.begin() + pos);
 }
 
+std::istream &operator>> (std::istream &is, Inventory &inv);
+
+std::string removeCharacters(std::string str);
+
 #endif /* INVENTORY_H */
 

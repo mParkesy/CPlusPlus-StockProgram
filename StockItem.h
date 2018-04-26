@@ -32,7 +32,6 @@ public:
     inline void setType(std::string type);
     inline void setCode(std::string code);
     inline void setStock(int stock);
-    virtual void setInfo() = 0;
 };
 
 inline std::string StockItem::getType() const {
@@ -63,6 +62,7 @@ inline void StockItem::setStock(int stock) {
     this->stock = stock;
 }
 
+
 // ===============================RESISTOR=====================================
 
 class Resistor : public StockItem {
@@ -72,8 +72,8 @@ public:
     Resistor(std::string resistance, std::string type, std::string code,
             int number, int pence);
     std::string getInfo();
-    void setInfo();
 };
+
 
 // ===============================CAPACITOR====================================
 
@@ -84,7 +84,6 @@ public:
     Capacitor(std::string capacitance, std::string type, std::string code,
             int number, int pence);
     std::string getInfo();
-    void setInfo();
 };
 
 // ==================================DIODE=====================================
@@ -93,7 +92,6 @@ class Diode : public StockItem {
 public:
     Diode(std::string type, std::string code, int number, int pence);
     std::string getInfo();
-    void setInfo();
 };
 
 // ===============================TRANSISTOR===================================
@@ -104,7 +102,6 @@ private:
 public:
     Transistor(std::string transistorType, std::string type, std::string code, int number, int pence);
     std::string getInfo();
-    void setInfo();
 };
 
 // ====================================IC======================================
@@ -115,7 +112,6 @@ private:
 public:
     IC(std::string ICtype, std::string type, std::string code, int number, int pence);
     std::string getInfo();
-    void setInfo();
 };
 
 #endif
