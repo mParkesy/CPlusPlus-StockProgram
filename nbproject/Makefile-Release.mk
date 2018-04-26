@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Inventory.o \
 	${OBJECTDIR}/StockItem.o \
 	${OBJECTDIR}/StockProgram.o
 
@@ -62,6 +63,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/electronics-inventory.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/electronics-inventory ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Inventory.o: Inventory.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Inventory.o Inventory.cpp
 
 ${OBJECTDIR}/StockItem.o: StockItem.cpp
 	${MKDIR} -p ${OBJECTDIR}

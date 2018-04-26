@@ -8,6 +8,9 @@
 #include "StockItem.h"
 #include <iostream>
 
+using namespace std;
+// ===============================STOCKITEM====================================
+
 StockItem::StockItem() {
 
 }
@@ -23,28 +26,11 @@ StockItem::~StockItem() {
 
 }
 
-string StockItem::getType() {
-    return this -> itemType;
-}
+// ===============================RESISTOR=====================================
 
-string StockItem::getCode() {
-    return this -> stockCode;
-}
-
-int StockItem::getStock() {
-    return this -> stock;
-}
-
-int StockItem::getPrice() {
-    return this -> price;
-}
-
-Resistor::Resistor(string resistance, string type, string code, int number, int pence) : StockItem(type, code, number, pence) {
+Resistor::Resistor(string resistance, string type, string code, 
+        int number, int pence) : StockItem(type, code, number, pence) {
     this -> resistance = std::move(resistance);
-}
-
-string Resistor::getResistance(){
-    return this -> resistance;
 }
 
 double Resistor::getNumericalResistance() {
@@ -75,35 +61,53 @@ double Resistor::getNumericalResistance() {
     if (secondDigits.length() > 0) {
         firstDigits = firstDigits + "." + secondDigits;
     }
-    double result = stod(firstDigits) * multiplier;
-    //cout << "Test: " << result  << endl;
     return stod(firstDigits) * multiplier;
 }
 
-Capacitor::Capacitor(string capacitance, string type, string code, int number, int pence) : StockItem(type, code, number, pence) {
+string Resistor::getInfo(){
+    return this->resistance;
+}
+
+// ===============================CAPACITOR====================================
+
+Capacitor::Capacitor(string capacitance, string type, string code, 
+        int number, int pence) : StockItem(type, code, number, pence) {
     this -> capacitance = capacitance;
 }
 
-string Capacitor::getCapacitance(){
+string Capacitor::getInfo(){
     return this -> capacitance;
 }
 
-Diode::Diode(string type, string code, int number, int pence) : StockItem(type, code, number, pence){
-    
+
+// =================================DIODE======================================
+
+Diode::Diode(string type, string code, int number, int pence) 
+        : StockItem(type, code, number, pence){  
 }
 
-Transistor::Transistor(string transistorType, string type, string code, int number, int pence) : StockItem(type, code, number, pence){
+string Diode::getInfo(){
+    return "n/a";
+}
+
+// ===============================TRANSISTOR===================================
+
+Transistor::Transistor(string transistorType, string type, string code, 
+        int number, int pence) : StockItem(type, code, number, pence){
     this -> transistorType = transistorType;
 }
 
-string Transistor::getTransistorType(){
+string Transistor::getInfo(){
     return this -> transistorType;
 }
 
-IC::IC(string ICtype, string type, string code, int number, int pence) : StockItem(type, code, number, pence){
+// ===================================IC=======================================
+
+IC::IC(string ICtype, string type, string code, int number, 
+        int pence) : StockItem(type, code, number, pence){
     this -> ICtype = ICtype;
 }
 
-string IC::getICtype(){
+string IC::getInfo(){
     return this -> ICtype;
 }
