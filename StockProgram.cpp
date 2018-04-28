@@ -13,6 +13,8 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <fcntl.h>
+#include <io.h>
 #include "StockItem.h"
 #include "Inventory.h"
 using namespace std;
@@ -24,13 +26,53 @@ int main(int argc, char** argv) {
     cout << "========================================" << endl;
     cout << "              StockProgram              " << endl;
     cout << "========================================" << endl;
+    cout << "                  Menu                  " << endl;
+    cout << "                  ----                  " << endl;
+    cout << "       1. Load assignment queries       " << endl;
+    cout << "       2. Input queries                 " << endl;
 
     cout << "" << endl;
+    string option = "";
+    cout << "Please chose an option: ";
+    cin >> option;
+    cout << "" << endl;
+
+    string file = "inventory.txt";
+    int sortType = 0;
+    int amount = 0;
+
+    if (option == "1") {
+        sortType = 1;
+        amount = 10;
+    } else if (option == "2") {
+        cout << "Chose an amount to query the number of Stock Items above that amount: ";
+        cin >> amount;
+        cout << "" << endl;
+
+        cout << "                Sorting Menu             " << endl;
+        cout << "                ------------             " << endl;
+        cout << "       1. Sort by Price descending       " << endl;
+        cout << "       2. Sort by Price ascending        " << endl;
+        cout << "       3. Sort by Type A-Z               " << endl;
+        cout << "       4. Sort by Code A-Z               " << endl;
+        cout << "       5. Sort by Stock Amount descending" << endl;
+        cout << "       6. Sort by Stock Amount ascending " << endl;
+        cout << "" << endl;
+        cout << "Please chose an option (1, 2, 3, 4): ";
+        cin >> sortType;
+        cout << "" << endl;
+
+        if (sortType < 1 && sortType > 4) {
+            cout << "Invalid selection, sort type set to option 1";
+            sortType = 1;
+        }
+    }
 
     Inventory *inventory = new Inventory;
-    cin >> *inventory; 
-    
-    string file = "inventory.txt";
+    inventory->setFile(file);
+
+    cin >> *inventory;
+
     cout << "File to be read: " << file << endl;
     cout << "Reading " << file << "..." << endl;
 
@@ -42,25 +84,27 @@ int main(int argc, char** argv) {
 
     cout << "" << endl;
 
-    // Print a list of the inventory, sorted in order of increasing price
-    inventory->sortInv();
-    cout << "Stock Items sorted by price: " << endl;
+    // Question 1 - Print a list of the inventory, sorted in order of increasing price
+    inventory->sortInv(sortType);
+    cout << "Stock Items sorted" << endl;
+    cout << "------------------" << endl;
     cout << *inventory;
-    
-    // What is the component with the largest number of components in stock?
+
+    // Question 2 - What is the component with the largest number of components in stock?
+    cout << "The component with the largest stock is: " << endl;
+    cout << inventory->largestInStockComponent() << endl;
 
     // How many NPN transistors does Chartlins have in stock?
     cout << "The number of NPN transistors that we have in stock is: " << inventory->getNumberOfNPNTransistors() << endl;
 
-
     // What is the total resistance of all of the resistors in stock?
     cout << "The total resistance of all resistors in stock is: ";
-    cout << setprecision(12) << inventory->getTotalInStockResistance() << endl;
+    cout << setprecision(12) << inventory->getTotalInStockResistance() << "\u03A9" << endl;
 
 
     // How man stock items have unit prices above 10p?
 
-    cout << "The total number of items that are priced above 10 pence is: ";
+    cout << "The total number of items that are priced above " << amount << " pence is: ";
     cout << inventory->getTotalStockAboveTenPence(10) << endl;
 
     return 0;

@@ -31,7 +31,7 @@ StockItem& Inventory::largestInStockComponent() {
     largest->setStock(0);
     for (StockItem *stockitem : inventory) {
         if (stockitem->getStock() > largest->getStock()) {
-            largest->setStock(stockitem->getStock());
+            largest = stockitem;
         }
     }
     return *largest;
@@ -41,7 +41,7 @@ int Inventory::getNumberOfNPNTransistors() {
     int total = 0;
     for (StockItem *stockitem : inventory) {
         if (stockitem->getInfo() == "NPN") {
-            total++;
+            total += stockitem->getStock();
         }
     }
     return total;
@@ -77,7 +77,7 @@ string removeCharacters(string str) {
 }
 
 std::istream& operator>>(std::istream &is, Inventory &inv) {
-    ifstream infile("inventory.txt");
+    ifstream infile(inv.getFile());
     while (infile) {
         string s;
         if (!getline(infile, s)) {
@@ -129,8 +129,20 @@ std::ostream& operator<<(std::ostream &os, const Inventory &inv){
 }
 
 
-void Inventory::sortInv(){
-    sort(inventory.begin(), inventory.end(), [](const StockItem* a, const StockItem* b) -> bool{
-        return a->getPrice() < b->getPrice();
+void Inventory::sortInv(int sortType){
+    sort(inventory.begin(), inventory.end(), [&sortType](const StockItem* a, const StockItem* b) -> bool{
+        if(sortType == 1){
+            return a->getPrice() > b->getPrice();
+        }else if(sortType == 2){
+            return a->getPrice() < b->getPrice();
+        } else if(sortType == 3){
+            return a->getType() < b->getType();
+        } else if(sortType == 4){
+            return a->getCode() > b->getCode();
+        } else if(sortType == 5){
+            return a->getStock() > b->getStock();
+        } else if(sortType == 6){
+            return a->getStock() < b->getStock();
+        }       
     });
 }

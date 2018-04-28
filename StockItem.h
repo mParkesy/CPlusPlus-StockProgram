@@ -9,7 +9,7 @@
 #define StockItem_H
 #include <string>
 #include <iomanip>
-
+#include <iostream>
 
 // ===============================STOCKITEM====================================
 
@@ -63,12 +63,13 @@ inline void StockItem::setStock(int stock) {
     this->stock = stock;
 }
 
-inline std::ostream& operator<<(std::ostream &os, const StockItem &item) {
-    return os << "\"" << item.itemType << "\"" << ","
-            << item.stockCode << ","
-            << "\"" << item.stock << "\"" << ","
-            << "\"" << item.price << "\"" << ","
-            << "\"" << item.getInfo();
+inline std::ostream& operator<<(std::ostream &os, const StockItem &item)
+{
+   return os << "Type: " << item.itemType << "\n"
+             << "Code: " << item.stockCode << "\n"
+             << "Stock: " << item.stock << "\n"
+             << "Price: " << item.price <<  "\n"
+           << "Info: " << item.getInfo() << std::endl;
 }
 
 std::istream& operator>>(std::istream &is, StockItem &item);

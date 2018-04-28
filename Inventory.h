@@ -13,7 +13,7 @@
 class Inventory {
 private:
     std::vector<StockItem*> inventory;
-    
+    std::string currentFile;
 public:
     Inventory();
     Inventory(const Inventory& orig);
@@ -22,11 +22,13 @@ public:
     inline void addStock(StockItem *item);
     inline StockItem& getStock(int pos) const;
     inline void removeStock(int pos);
+    inline std::string getFile() const;
+    inline void setFile(std::string file);
     StockItem& largestInStockComponent();
     int getNumberOfNPNTransistors();
     double getTotalInStockResistance();
     int getTotalStockAboveTenPence(int amount);
-    void sortInv();
+    void sortInv(int sortType);
     friend std::ostream& operator<<(std::ostream &os, const Inventory &inv);
     
 };
@@ -46,6 +48,14 @@ inline StockItem& Inventory::getStock(int pos) const
 
 inline void Inventory::removeStock(int pos){
     inventory.erase(inventory.begin() + pos);
+}
+
+inline std::string Inventory::getFile() const {
+    return this->currentFile;
+}
+
+inline void Inventory::setFile(std::string file) {
+    this->currentFile = file;
 }
 
 std::ostream& operator<<(std::ostream &os, const Inventory &inv);
