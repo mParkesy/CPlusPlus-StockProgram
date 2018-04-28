@@ -68,8 +68,7 @@ inline std::ostream& operator<<(std::ostream &os, const StockItem &item)
    return os << "Type: " << item.itemType << "\n"
              << "Code: " << item.stockCode << "\n"
              << "Stock: " << item.stock << "\n"
-             << "Price: " << item.price <<  "\n"
-           << "Info: " << item.getInfo() << std::endl;
+             << "Price: " << item.price << std::endl;
 }
 
 std::istream& operator>>(std::istream &is, StockItem &item);
