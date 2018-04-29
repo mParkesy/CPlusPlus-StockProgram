@@ -50,14 +50,14 @@ int Inventory::getNumberOfNPNTransistors() {
 double Inventory::getTotalInStockResistance() {
     double total = 0;
     for (StockItem *stockitem : inventory) {
-        if (stockitem->getStock() > 0 && stockitem->getType() == "resistor") {
+        if (stockitem->getStock() > 0 && stockitem->getType() == "Resistor") {
             total += stod(stockitem->getInfo()) * stockitem->getStock();
         }
     }
     return total;
 }
 
-int Inventory::getTotalStockAboveTenPence(int amount) {
+int Inventory::getTotalStockAbovePrice(int amount) {
     int stockTotal = 0;
     for (StockItem *stockitem : this->inventory) {
         if (stockitem->getPrice() > amount) {
@@ -67,13 +67,30 @@ int Inventory::getTotalStockAboveTenPence(int amount) {
     return stockTotal;
 }
 
-string removeCharacters(string str) {
-    for (int i = 0; i < str.length(); i++) {
-        if (str[i] == ' ' || str[i] == '\r') {
-            str.erase(i, 1);
-        }
+void Inventory::sortInv(int sortType){
+    sort(inventory.begin(), inventory.end(), [&sortType](const StockItem* a, 
+            const StockItem* b) -> bool{
+        if(sortType == 1){
+            return a->getPrice() > b->getPrice();
+        }else if(sortType == 2){
+            return a->getPrice() < b->getPrice();
+        } else if(sortType == 3){
+            return a->getType() < b->getType();
+        } else if(sortType == 4){
+            return a->getCode() > b->getCode();
+        } else if(sortType == 5){
+            return a->getStock() > b->getStock();
+        } else if(sortType == 6){
+            return a->getStock() < b->getStock();
+        }       
+    });
+}
+
+std::ostream& operator<<(std::ostream &os, const Inventory &inv){
+    for(StockItem *stockitem : inv.inventory){
+        os << *stockitem << endl;
     }
-    return str;
+    return os;
 }
 
 std::istream& operator>>(std::istream &is, Inventory &inv) {
@@ -99,15 +116,18 @@ std::istream& operator>>(std::istream &is, Inventory &inv) {
 
         if (type == "resistor") {
             string resistance = removeCharacters(line.at(4));
-            Resistor *resistor = new Resistor(resistance, type, code, stoi(quantity), stoi(price));
+            Resistor *resistor = new Resistor(resistance, type, code, 
+                    stoi(quantity), stoi(price));
             inv.addStock(resistor);
         } else if (type == "transistor") {
             string tranType = removeCharacters(line.at(4));
-            Transistor *transistor = new Transistor(tranType, type, code, stoi(quantity), stoi(price));
+            Transistor *transistor = new Transistor(tranType, type, code, 
+                    stoi(quantity), stoi(price));
             inv.addStock(transistor);
         } else if (type == "capacitor") {
             string capacitance = removeCharacters(line.at(4));
-            Capacitor *capacitor = new Capacitor(capacitance, type, code, stoi(quantity), stoi(price));
+            Capacitor *capacitor = new Capacitor(capacitance, type, code, 
+                    stoi(quantity), stoi(price));
             inv.addStock(capacitor);
         } else if (type == "diode") {
             Diode *diode = new Diode(type, code, stoi(quantity), stoi(price));
@@ -121,28 +141,11 @@ std::istream& operator>>(std::istream &is, Inventory &inv) {
     return is;
 }
 
-std::ostream& operator<<(std::ostream &os, const Inventory &inv){
-    for(StockItem *stockitem : inv.inventory){
-        os << *stockitem << endl;
+string removeCharacters(string str) {
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == ' ' || str[i] == '\r') {
+            str.erase(i, 1);
+        }
     }
-    return os;
-}
-
-
-void Inventory::sortInv(int sortType){
-    sort(inventory.begin(), inventory.end(), [&sortType](const StockItem* a, const StockItem* b) -> bool{
-        if(sortType == 1){
-            return a->getPrice() > b->getPrice();
-        }else if(sortType == 2){
-            return a->getPrice() < b->getPrice();
-        } else if(sortType == 3){
-            return a->getType() < b->getType();
-        } else if(sortType == 4){
-            return a->getCode() > b->getCode();
-        } else if(sortType == 5){
-            return a->getStock() > b->getStock();
-        } else if(sortType == 6){
-            return a->getStock() < b->getStock();
-        }       
-    });
+    return str;
 }

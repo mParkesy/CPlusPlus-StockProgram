@@ -15,14 +15,19 @@ StockItem::StockItem() {
 }
 
 StockItem::StockItem(string type, string code, int number, int pence) {
+    type[0] = toupper(type[0]);
     this -> itemType = std::move(type);
     this -> stockCode = std::move(code);
     this -> stock = number;
     this -> price = pence;
 }
 
-StockItem::~StockItem() {
+StockItem::StockItem(const StockItem& orig){
+    
+}
 
+StockItem::~StockItem() {
+    
 }
 
 // ===============================RESISTOR=====================================
@@ -60,7 +65,7 @@ string Resistor::getInfo() {
     if (secondDigits.length() > 0) {
         firstDigits = firstDigits + "." + secondDigits;
     }
-    double result = stoi(firstDigits) * multiplier;
+    double result = stod(firstDigits) * multiplier;
     return to_string(result);
 }
 
@@ -75,6 +80,28 @@ string Capacitor::getInfo() {
     return this -> capacitance;
 }
 
+//string Capacitor::getInfo() {
+//    string c = "";
+//    string units = "";
+//    for (int i = 0; i < capacitance.length(); i++) {
+//        if (isdigit(capacitance[i])) {
+//            c = c + capacitance[i];
+//        } else if (isalpha(capacitance[i])) {
+//            units = units + capacitance[i];
+//        }
+//    }
+//    double multiplier = 0;
+//    if (units == "pf") {
+//        multiplier = 0.000001;
+//    } else if (units == "nF" || units == "nf") {
+//        multiplier = 1000;
+//    } else if (units == "uF") {
+//        multiplier = 0;
+//    }
+//    
+//    double result = stod(c) * multiplier;
+//    return to_string(result);
+//}
 
 // =================================DIODE======================================
 
