@@ -1,6 +1,8 @@
 /* 
- * File:   StockItem.cpp
- * Author: Parkesy
+ * File:        StockItem.h
+ * Author:      100116544
+ * Description: CPP file for StockItem class which consists
+ *              of a type, code, stock amount and price.
  * 
  * Created on 19 April 2018, 12:20
  */
@@ -18,7 +20,7 @@ StockItem::StockItem(string type, string code, int number, int pence) {
     type[0] = toupper(type[0]);
     this -> itemType = std::move(type);
     this -> stockCode = std::move(code);
-    this -> stock = number;
+    this -> quantity = number;
     this -> price = pence;
 }
 
@@ -37,7 +39,11 @@ Resistor::Resistor(string resistance, string type, string code,
     this -> resistance = std::move(resistance);
 }
 
-string Resistor::getInfo() {
+string Resistor::getInfo() const {
+    return this->resistance;
+}
+
+double Resistor::getResistance() const{
     string firstDigits = "";
     string secondDigits = "";
     string letter = "";
@@ -65,8 +71,7 @@ string Resistor::getInfo() {
     if (secondDigits.length() > 0) {
         firstDigits = firstDigits + "." + secondDigits;
     }
-    double result = stod(firstDigits) * multiplier;
-    return to_string(result);
+    return stod(firstDigits) * multiplier;    
 }
 
 // ===============================CAPACITOR====================================
@@ -76,7 +81,7 @@ Capacitor::Capacitor(string capacitance, string type, string code,
     this -> capacitance = capacitance;
 }
 
-string Capacitor::getInfo() {
+string Capacitor::getInfo() const {
     return this -> capacitance;
 }
 
@@ -109,7 +114,7 @@ Diode::Diode(string type, string code, int number, int pence)
 : StockItem(type, code, number, pence) {
 }
 
-string Diode::getInfo() {
+string Diode::getInfo() const {
     return "n/a";
 }
 
@@ -120,7 +125,7 @@ Transistor::Transistor(string transistorType, string type, string code,
     this -> transistorType = transistorType;
 }
 
-string Transistor::getInfo() {
+string Transistor::getInfo() const {
     return this -> transistorType;
 }
 
@@ -131,6 +136,6 @@ IC::IC(string ICtype, string type, string code, int number,
     this -> ICtype = ICtype;
 }
 
-string IC::getInfo() {
+string IC::getInfo() const {
     return this -> ICtype;
 }

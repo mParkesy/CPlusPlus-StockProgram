@@ -19,7 +19,7 @@ class StockItem {
 private:
     std::string itemType;
     std::string stockCode;
-    int stock;
+    int quantity;
     int price;
 
 public:
@@ -39,7 +39,7 @@ public:
     StockItem(std::string type, std::string code, int number, int pence);
 
     StockItem(const StockItem& orig);
-    ~StockItem();
+    virtual ~StockItem();
 
     /**
      * Gets the type of StockItem for the current instance
@@ -57,7 +57,7 @@ public:
      * Gets the amount of stock for the current StockItem instance
      * @return An integer containing the stock amount
      */
-    inline int getStock() const;
+    inline int getQuantity() const;
 
     /**
      * Gets the price of the StockItem for the current instance
@@ -70,7 +70,7 @@ public:
      * to return the additional information for each StockItem type
      * @return A string containing the StockItems additional information
      */
-    virtual std::string getInfo() = 0;
+    virtual std::string getInfo() const = 0;
 
     /**
      * Sets the StockItem type for the current StockItem instance
@@ -88,7 +88,7 @@ public:
      * Sets the StockItem amount of stock for the current StockItem instance
      * @param stock - An integer containing the new StockItem amount to be set
      */
-    inline void setStock(int stock);
+    inline void setQuantity(int stock);
 
     /**
      * Grants a separate function or class access to private
@@ -105,8 +105,8 @@ inline std::string StockItem::getCode() const {
     return this -> stockCode;
 }
 
-inline int StockItem::getStock() const {
-    return this -> stock;
+inline int StockItem::getQuantity() const {
+    return this -> quantity;
 }
 
 inline int StockItem::getPrice() const {
@@ -121,8 +121,8 @@ inline void StockItem::setCode(std::string code) {
     this->stockCode = code;
 }
 
-inline void StockItem::setStock(int stock) {
-    this->stock = stock;
+inline void StockItem::setQuantity(int stock) {
+    this->quantity = stock;
 }
 
 /**
@@ -134,11 +134,10 @@ inline void StockItem::setStock(int stock) {
  */
 inline std::ostream& operator<<(std::ostream &os, const StockItem &item) {
     return os << "Type:  " << item.itemType << "\n"
-            << "Code: " << item.stockCode << "\n"
-            << "Stock: " << item.stock << "\n"
+            << "Code:  " << item.stockCode << "\n"
+            << "Stock: " << item.quantity << "\n"
             << "Price: " << item.price << "\n"
-            << "\n"
-            << "********************" << std::endl;
+            << "Additional Information: " << item.getInfo() << "\n";
 }
 
 // ===============================RESISTOR=====================================
@@ -169,7 +168,13 @@ public:
      * decimal digit in Ohms
      * @return A string containing the decimal value of the Resistor in Ohms
      */
-    std::string getInfo();
+    std::string getInfo() const;
+    
+    /**
+     * Calculates the decimal value for the Resistor in ohms
+     * @return The decimal ohms value as a double
+     */
+    double getResistance() const;
 };
 
 
@@ -199,7 +204,7 @@ public:
      * An implementation of the virtual method for the derived class Capacitor
      * @return A string containing the capacitance of the capacitor
      */
-    std::string getInfo();
+    std::string getInfo() const;
 };
 
 // ==================================DIODE=====================================
@@ -224,7 +229,7 @@ public:
      * @return A blank string due to a Diode containing 
      * no additional information
      */
-    std::string getInfo();
+    std::string getInfo() const;
 };
 
 // ===============================TRANSISTOR===================================
@@ -253,14 +258,14 @@ public:
      * An implementation of the virtual method for the derived class Transistor
      * @return A string containing the transistor type
      */
-    std::string getInfo();
+    std::string getInfo() const;
 };
 
 // ====================================IC======================================
 
 /**
- * A derived class of type Internal Component which stores an additional string
- * field which contains the Internal Components type
+ * A derived class of type Internal Circuit which stores an additional string
+ * field which contains the Internal Circuits type
  */
 class IC : public StockItem {
 private:
@@ -268,7 +273,7 @@ private:
 public:
     /**
      * A constructor that calls on the StockItem constructor along with the
-     * additional Internal Component type field for Internal Component
+     * additional Internal Circuit type field for Internal Circuits
      * @param ICtype - A string containing the IC type
      * @param type - The type of StockItem as a string
      * @param code - The code of the StockItem as a string
@@ -280,9 +285,9 @@ public:
     
     /**
      * An implementation of the virtual method for the derived class IC
-     * @return A string containing the Internal Component type
+     * @return A string containing the Internal Circuit type
      */
-    std::string getInfo();
+    std::string getInfo() const ;
 };
 
 #endif

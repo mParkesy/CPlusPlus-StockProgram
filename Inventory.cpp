@@ -1,6 +1,8 @@
 /* 
- * File:   Inventory.cpp
- * Author: Parkesy
+ * File:        Inventory.cpp
+ * Author:      100116544
+ * Description: CPP file for Inventory class which consists
+ *              of StockItem objects.
  * 
  * Created on 26 April 2018, 11:05
  */
@@ -26,22 +28,22 @@ Inventory::~Inventory() {
     }
 }
 
-StockItem& Inventory::largestInStockComponent() {
+StockItem& Inventory::HighestStock() {
     StockItem *largest;
-    largest->setStock(0);
+    largest->setQuantity(0);
     for (StockItem *stockitem : inventory) {
-        if (stockitem->getStock() > largest->getStock()) {
+        if (stockitem->getQuantity() > largest->getQuantity()) {
             largest = stockitem;
         }
     }
     return *largest;
 }
 
-int Inventory::getNumberOfNPNTransistors() {
+int Inventory::searchInfo(string search) {
     int total = 0;
     for (StockItem *stockitem : inventory) {
-        if (stockitem->getInfo() == "NPN") {
-            total += stockitem->getStock();
+        if (stockitem->getInfo() == search) {
+            total += stockitem->getQuantity();
         }
     }
     return total;
@@ -49,9 +51,11 @@ int Inventory::getNumberOfNPNTransistors() {
 
 double Inventory::getTotalInStockResistance() {
     double total = 0;
+    Resistor *r = nullptr;
     for (StockItem *stockitem : inventory) {
-        if (stockitem->getStock() > 0 && stockitem->getType() == "Resistor") {
-            total += stod(stockitem->getInfo()) * stockitem->getStock();
+        if (stockitem->getQuantity() > 0 && stockitem->getType() == "Resistor") {
+            r = static_cast<Resistor*>(stockitem);
+            total += r->getResistance() * r->getQuantity();
         }
     }
     return total;
@@ -79,9 +83,9 @@ void Inventory::sortInv(int sortType){
         } else if(sortType == 4){
             return a->getCode() > b->getCode();
         } else if(sortType == 5){
-            return a->getStock() > b->getStock();
+            return a->getQuantity() > b->getQuantity();
         } else if(sortType == 6){
-            return a->getStock() < b->getStock();
+            return a->getQuantity() < b->getQuantity();
         }       
     });
 }
@@ -138,6 +142,7 @@ std::istream& operator>>(std::istream &is, Inventory &inv) {
             inv.addStock(ic);
         }
     }
+    infile.close();
     return is;
 }
 

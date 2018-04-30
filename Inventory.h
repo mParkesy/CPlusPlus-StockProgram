@@ -65,16 +65,16 @@ public:
     inline void setFile(std::string file);
     
     /**
-     * Gets the StockItem with the largest amount of stock from the inventory
+     * Gets the StockItem with the highest amount of stock from the inventory
      * @return The StockItem object
      */
-    StockItem& largestInStockComponent();
+    StockItem& HighestStock();
     
     /**
      * Gets the total stock of all transistor of type NPN in the inventory
      * @return The amount of stock as an integer
      */
-    int getNumberOfNPNTransistors();
+    int searchInfo(std::string search);
     
     /**
      * Gets the total resistance of all in stock resistors in the inventory
